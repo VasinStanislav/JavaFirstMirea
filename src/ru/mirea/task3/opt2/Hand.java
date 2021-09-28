@@ -1,11 +1,10 @@
 package ru.mirea.task3.opt2;
 
-public class Hand {
+public class Hand extends Bones {
     private boolean handing;
-    private boolean broken;
 
     public Hand() {
-        this.broken = false;
+        super();
         this.handing = false;
     }
 
@@ -13,16 +12,8 @@ public class Hand {
         return handing;
     }
 
-    public boolean isBroken() {
-        return broken;
-    }
-
-    public void breakHand() {
-        broken = true;
-    }
-
     public boolean grab()   {
-        if (broken) {
+        if (this.isBroken()) {
             return false;
         }
         else    {
@@ -32,12 +23,18 @@ public class Hand {
     }
 
     public boolean open() {
-        if (broken) {
+        if (this.isBroken()) {
             return false;
         } else {
             this.handing = false;
             return true;
 
         }
+    }
+
+    @Override
+    public String toString() {
+        return ("Рука " + (this.isBroken() ? "не " : "") + "в порядке" +
+                "\nРука " + (this.handing ? "сжата" : "разжата"));
     }
 }

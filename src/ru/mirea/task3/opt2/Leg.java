@@ -1,29 +1,19 @@
 package ru.mirea.task3.opt2;
 
-public class Leg {
-    private boolean broken;
+public class Leg extends Bones {
     private boolean inMovement;
 
     public Leg() {
-        this.broken = false;
-        this.broken = false;
-    }
-
-    public boolean isBroken() {
-        return broken;
+        super();
+        inMovement = false;
     }
 
     public boolean isInMovement() {
         return inMovement;
     }
 
-    public void breakLeg() {
-        this.broken = true;
-        this.stop();
-    }
-
     public boolean move()   {
-        if (broken) {
+        if (this.isBroken()) {
             return false;
         }
         else {
@@ -32,7 +22,19 @@ public class Leg {
         }
     }
 
-    public void stop()   {
+    public void stop() {
         this.inMovement = false;
+    }
+
+    @Override
+    public void breakSomething() {
+        super.breakSomething();
+        this.stop();
+    }
+
+    @Override
+    public String toString() {
+        return ((!inMovement ? "Не в движении" : "В движении") +
+                "\nНога " + (this.isBroken() ? "не " : "") + "в порядке");
     }
 }
