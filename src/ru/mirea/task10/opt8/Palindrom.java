@@ -8,10 +8,12 @@ public class Palindrom {
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите слово: ");
         str = sc.nextLine();
-        System.out.print(str);
+        char[] string = new char[str.length()];
+        string = str.toCharArray();
+        System.out.print(isPal(string, 0) ? "YES" : "NO");
     }
 
-    public static boolean isPal(String[] str, int i) {
+    public static boolean isPal(char[] str, int i) {
         return (i < str.length/2 ? str[i] == str[str.length - i - 1] ? isPal(str, i+1) : false : true);
     }
 }
