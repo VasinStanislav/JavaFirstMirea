@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JavaFirstMirea.iml" filepath="$PROJECT_DIR$/JavaFirstMirea.iml" />
-      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/opt1.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/opt1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/opt2.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/opt2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt3/opt3/opt3.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt3/opt3/opt3.iml" />
     </modules>
   </component>
 </project>

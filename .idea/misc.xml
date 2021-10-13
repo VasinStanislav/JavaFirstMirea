@@ -4,6 +4,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/pom.xml" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/pom.xml" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/task8/opt3/opt3/pom.xml" />
       </list>
     </option>
   </component>
