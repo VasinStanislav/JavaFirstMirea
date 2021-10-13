@@ -8,6 +8,23 @@ public class Sieve {
         System.out.print("Введите натуральное число больше 1: ");
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        Integer[] arr;
+        System.out.print((isPrime(n, 2)) ? "YES" : "NO");
+    }
+
+    public static boolean isPrime(Integer n, Integer divider)   {
+        if (n < 2) {
+            return false;
+        }
+        else if (n == 2) {
+            return true;
+        }
+        else if (n % divider == 0) {
+            return false;
+        }
+        else if (divider < n / 2) {
+            return isPrime(n, divider + 1);
+        } else {
+            return true;
+        }
     }
 }
