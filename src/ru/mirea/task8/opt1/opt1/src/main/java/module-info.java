@@ -1,6 +1,7 @@
 module opt1.opt1 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     //requires rt;
 
 
