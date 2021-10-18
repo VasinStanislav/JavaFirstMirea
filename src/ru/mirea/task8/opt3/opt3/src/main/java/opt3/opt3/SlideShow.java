@@ -37,7 +37,7 @@ public class SlideShow extends Application {
         HBox box = new HBox();
         box.getChildren().add(imView);
         root.getChildren().add(box);
-        stage.setTitle("What a turn-up!");
+        stage.setTitle("The twist");
         root.setAlignment(Pos.CENTER);
         stage.setScene(scene);
         stage.show();

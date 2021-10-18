@@ -15,7 +15,7 @@ public class ShowShapes extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         AnchorPane root = new AnchorPane();
         for (int i = 0; i<20; i++) {
             Shape figure = getRandomShape();
