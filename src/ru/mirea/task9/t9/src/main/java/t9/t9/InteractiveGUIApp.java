@@ -76,5 +76,3 @@ public class InteractiveGUIApp extends Application {
         stage.show();
     }
 }
-
-
