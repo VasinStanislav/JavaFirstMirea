@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>opt2.opt2/opt2.opt2.HelloApplication</mainClass>
+                            <mainClass>opt2.opt2/opt2.opt2.Picture</mainClass>
                         </configuration>
                     </execution>
                 </executions>

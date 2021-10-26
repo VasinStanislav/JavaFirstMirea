@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>opt3</groupId>
-    <artifactId>opt3</artifactId>
+    <groupId>t11_3</groupId>
+    <artifactId>t11_3</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>opt3</name>
+    <name>t11_3</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>opt3.opt3/opt3.opt3.SlideShow</mainClass>
+                            <mainClass>t11_3.t11_3/t11_3.t11_3.WritingApp</mainClass>
                         </configuration>
                     </execution>
                 </executions>

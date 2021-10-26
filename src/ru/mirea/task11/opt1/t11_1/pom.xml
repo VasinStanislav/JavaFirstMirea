@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>t11_1.t11_1/t11_1.t11_1.HelloApplication</mainClass>
+                            <mainClass>t11_1.t11_1/t11_1.t11_1.GuessingGame</mainClass>
                         </configuration>
                     </execution>
                 </executions>

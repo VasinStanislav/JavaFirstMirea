@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="opt1" />
-        <module name="opt2" />
+        <module name="t11_3" />
         <module name="opt3" />
         <module name="t9" />
+        <module name="opt1" />
+        <module name="opt2" />
+        <module name="t11_2" />
         <module name="t11_1" />
       </profile>
     </annotationProcessing>
@@ -19,6 +21,8 @@
       <module name="opt2" target="16" />
       <module name="opt3" target="16" />
       <module name="t11_1" target="16" />
+      <module name="t11_2" target="16" />
+      <module name="t11_3" target="16" />
       <module name="t9" target="16" />
     </bytecodeTargetLevel>
   </component>

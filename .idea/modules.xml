@@ -6,7 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/opt1.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/opt1.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/opt2.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/opt2.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt3/opt3/opt3.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt3/opt3/opt3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/t11_1/t11_1.iml" filepath="$PROJECT_DIR$/t11_1/t11_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task11/opt1/t11_1/t11_1.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task11/opt1/t11_1/t11_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task11/opt2/t11_2/t11_2.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task11/opt2/t11_2/t11_2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task11/opt3/t11_3/t11_3.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task11/opt3/t11_3/t11_3.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task9/t9/t9.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task9/t9/t9.iml" />
     </modules>
   </component>
