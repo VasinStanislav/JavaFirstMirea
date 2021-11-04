@@ -4,9 +4,9 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 
@@ -35,16 +35,40 @@ public class PosReaction extends Application {
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //root.getChildren().add(new Label("It is moving!!!"));
-                System.out.print("./");
+                Alert alertWelcome = new Alert(Alert.AlertType.INFORMATION);
+                alertWelcome.setTitle("Welcome!");
+
+                if (mouseEvent.getX() >= (root.getWidth()/2.0 + root.getWidth()/4.0)) {
+                    if (mouseEvent.getY() >= 4.0 * root.getHeight()/5.0) {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Юга");
+                    } else if (mouseEvent.getY() <= root.getHeight()/5.0)  {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Севера");
+                    } else  {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Запада");
+                    }
+                } else if (mouseEvent.getX() <= (root.getWidth()/2.0 - root.getWidth()/4.0))    {
+                    if (mouseEvent.getY() >= 4.0 * root.getHeight()/5.0) {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Юга");
+                    } else if (mouseEvent.getY() <= root.getHeight()/5.0)  {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Севера");
+                    } else  {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Востока");
+                    }
+                } else  {
+                    if (mouseEvent.getY() >= 4.0 * root.getHeight()/5.0) {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Юга");
+                    } else if (mouseEvent.getY() <= root.getHeight()/5.0)  {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Севера");
+                    } else  {
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Центра");
+                    }
+                }
+
+                alertWelcome.showAndWait();
             }
         };
 
-        root.getCenter().addEventHandler(MouseEvent.MOUSE_ENTERED, eventHandler);
-        root.getLeft().addEventHandler(MouseEvent.MOUSE_ENTERED, eventHandler);
-        root.getRight().addEventHandler(MouseEvent.MOUSE_ENTERED, eventHandler);
-        root.getTop().addEventHandler(MouseEvent.MOUSE_ENTERED, eventHandler);
-        root.getBottom().addEventHandler(MouseEvent.MOUSE_ENTERED, eventHandler);
+        root.addEventHandler(MouseEvent.MOUSE_MOVED, eventHandler);
         Scene scene = new Scene(root);
 
         stage.setTitle("PosReaction");

@@ -30,8 +30,8 @@ public class GuessingGame extends Application {
 
         AnchorPane.setTopAnchor(label, 10.0);
         AnchorPane.setLeftAnchor(label, 14.0);
-        AnchorPane.setTopAnchor(labelTryAgain, 100.0);
-        AnchorPane.setLeftAnchor(labelTryAgain, 106.0);
+        AnchorPane.setTopAnchor(labelTryAgain, 90.0);
+        AnchorPane.setLeftAnchor(labelTryAgain, 50.0);
         AnchorPane.setTopAnchor(textField, 125.0);
         AnchorPane.setLeftAnchor(textField, 110.0);
         AnchorPane.setRightAnchor(textField, 110.0);
@@ -67,7 +67,22 @@ public class GuessingGame extends Application {
                         alertLose.setHeaderText("Oops!");
                         alertLose.showAndWait();
                     } else {
-                        labelTryAgain.setText("Try Again");
+                        String message = "Try Again\nThe adjusted number is ";
+                        if (textField.getText().toString().length() <= randNum.toString().length())  {
+                            if (textField.getText().toString().length() < randNum.toString().length())  {
+                                message += "bigger";
+                            }
+                            if (textField.getText().toString().length() == randNum.toString().length()) {
+                                if (textField.getText().compareTo(randNum.toString())<0)    {
+                                    message += "bigger";
+                                } else {
+                                  message += "smaller";
+                                }
+                            }
+                        } else {
+                            message += "smaller";
+                        }
+                        labelTryAgain.setText(message);
                     }
                 }
             }
