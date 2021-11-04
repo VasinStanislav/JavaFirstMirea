@@ -46,4 +46,13 @@ public class Student {
     public void setGPA(Double gPA) {
         this.gPA = gPA;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "iDNumber='" + iDNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", gPA=" + gPA +
+                '}';
+    }
 }
