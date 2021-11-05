@@ -44,7 +44,7 @@ public class PosReaction extends Application {
                     } else if (mouseEvent.getY() <= root.getHeight()/5.0)  {
                         alertWelcome.setHeaderText("Добро пожаловать в зону Севера");
                     } else  {
-                        alertWelcome.setHeaderText("Добро пожаловать в зону Запада");
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Востока");
                     }
                 } else if (mouseEvent.getX() <= (root.getWidth()/2.0 - root.getWidth()/4.0))    {
                     if (mouseEvent.getY() >= 4.0 * root.getHeight()/5.0) {
@@ -52,7 +52,7 @@ public class PosReaction extends Application {
                     } else if (mouseEvent.getY() <= root.getHeight()/5.0)  {
                         alertWelcome.setHeaderText("Добро пожаловать в зону Севера");
                     } else  {
-                        alertWelcome.setHeaderText("Добро пожаловать в зону Востока");
+                        alertWelcome.setHeaderText("Добро пожаловать в зону Запада");
                     }
                 } else  {
                     if (mouseEvent.getY() >= 4.0 * root.getHeight()/5.0) {

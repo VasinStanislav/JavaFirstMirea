@@ -22,7 +22,7 @@
       <module name="opt3" target="16" />
       <module name="t11_1" target="16" />
       <module name="t11_2" target="16" />
-      <module name="t11_3" target="16" />
+      <module name="t11_3" target="17" />
       <module name="t9" target="16" />
     </bytecodeTargetLevel>
   </component>
