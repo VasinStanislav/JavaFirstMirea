@@ -1,4 +1,4 @@
-package ru.mirea.task17.examples.package01;
+package ru.mirea.task17.examples.Package01;
 
 // В программе демонстрируется применение методов values() и valueOf()
 class EnumDemo2 {
@@ -6,15 +6,15 @@ class EnumDemo2 {
         Apple ap;
         System.out.println("Константы перечислимого типа Apple:");
 
-        // создается переменная allapples, которой присваивается ссылка на массив значений перечислимого типа.
-        Apple allapples[] = Apple.values();
-        for (Apple a : allapples) {
+        // создается переменная allApples, которой присваивается ссылка на массив значений перечислимого типа.
+        Apple[] allApples = Apple.values();
+        for (Apple a : allApples) {
             System.out.println(a);
         }
 
         System.out.println("\nКонстанты перечислимого типа Apple:");
 
-        // цикл for можно написать и без переменной allapples
+        // цикл for можно написать и без переменной allApples
         for (Apple a : Apple.values() ) {
             System.out.print(a + " ");
         }
