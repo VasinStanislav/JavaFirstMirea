@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.net.URL;
 
 public class GameEngine extends Application {
 
@@ -23,10 +24,7 @@ public class GameEngine extends Application {
     public void start(Stage stage) throws IOException {
         AnchorPane root = new AnchorPane();
 
-        String path = "C:\\Users\\Виктория\\Downloads\\Semen1.png";
-        File file = new File(path);
-        String picturePath = file.toURI().toURL().toString();
-        Image image = new Image(picturePath);
+        Image image = new Image("file:src/ru/mirea/mygamepkg/game/src/main/resources/game/sprites/Semen1.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(200.0);
         imageView.setFitWidth(200.0);

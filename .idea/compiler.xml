@@ -18,7 +18,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo" target="16" />
+      <module name="demo" target="17" />
       <module name="game" target="17" />
       <module name="opt1" target="16" />
       <module name="opt2" target="16" />
