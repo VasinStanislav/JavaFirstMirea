@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="t11_3" />
         <module name="game" />
+        <module name="game_exception" />
         <module name="opt3" />
         <module name="t14_5" />
         <module name="t9" />
@@ -20,6 +21,8 @@
     <bytecodeTargetLevel>
       <module name="demo" target="17" />
       <module name="game" target="17" />
+      <module name="game.exception" target="17" />
+      <module name="game_exception" target="17" />
       <module name="opt1" target="16" />
       <module name="opt2" target="16" />
       <module name="opt3" target="16" />
