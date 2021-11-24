@@ -55,8 +55,8 @@ public class GameEngine extends Application {
 
         final ImageView imageView = new ImageView(IMAGE);
         character = new Character(imageView);
-        //imageView.setFitHeight(128);
-        //imageView.setFitWidth(128);
+        imageView.setFitHeight(128);
+        imageView.setFitWidth(128);
         imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
         final Animation animation = new SpriteAnimation(imageView, Duration.millis(500.0),
                 COUNT, COLUMNS, OFFSET_X, OFFSET_Y, WIDTH, HEIGHT);
@@ -141,19 +141,19 @@ public class GameEngine extends Application {
         if (isPressed(KeyCode.W))  {
             character.animation.play();
             character.animation.setOffsetY(96);
-            character.moveY(-2);
+            character.moveY(-4);
         } else if (isPressed(KeyCode.S))    {
             character.animation.play();
             character.animation.setOffsetY(0);
-            character.moveY(2);
+            character.moveY(4);
         } else if (isPressed(KeyCode.D))    {
             character.animation.play();
             character.animation.setOffsetY(64);
-            character.moveX(2);
+            character.moveX(4);
         } else if (isPressed(KeyCode.A))    {
             character.animation.play();
             character.animation.setOffsetY(32);
-            character.moveX(-2);
+            character.moveX(-4);
         } else {
             character.animation.stop();
         }
