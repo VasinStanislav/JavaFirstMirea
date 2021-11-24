@@ -1,9 +1,6 @@
 package game.game;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
-import javafx.animation.FillTransition;
-import javafx.animation.Transition;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -11,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -23,11 +21,16 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameEngine extends Application {
     private final Image IMAGE = new Image("file:src/ru/mirea/mygamepkg/game/src/main/resources/game/sprites/Semen.png");
-    private static final int COUNT = 4;
+    private Character character;
+    private final Map<KeyCode, Boolean> keysMap = new HashMap<>();
+    private static final int COUNT = 3;
+    private static final int COLUMNS = 3;
     private static final int OFFSET_X = 0;
     private static final int OFFSET_Y = 32;
     private static final int WIDTH = 32;
@@ -36,6 +39,8 @@ public class GameEngine extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    /*---------------------------------------------------"Движок" игры-----------------------------------------*/
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -49,11 +54,12 @@ public class GameEngine extends Application {
         menuImgView.setFitWidth(1350.0);
 
         final ImageView imageView = new ImageView(IMAGE);
-        imageView.setFitHeight(128);
-        imageView.setFitWidth(128);
+        character = new Character(imageView);
+        //imageView.setFitHeight(128);
+        //imageView.setFitWidth(128);
         imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
         final Animation animation = new SpriteAnimation(imageView, Duration.millis(500.0),
-                COUNT, OFFSET_X, OFFSET_Y, WIDTH, HEIGHT);
+                COUNT, COLUMNS, OFFSET_X, OFFSET_Y, WIDTH, HEIGHT);
 
         root.getChildren().add(menuImgView);
 
@@ -82,6 +88,19 @@ public class GameEngine extends Application {
             root.getChildren().remove(0);
             scene.setFill(Color.BLACK);
             stage.setFullScreen(true);
+
+            root.getChildren().add(character);
+
+            scene.setOnKeyPressed(keyEvent->keysMap.put(keyEvent.getCode(), true));
+            scene.setOnKeyReleased(keyEvent -> keysMap.put(keyEvent.getCode(), false));
+
+            AnimationTimer timer = new AnimationTimer() {
+                @Override
+                public void handle(long l) {
+                    update();
+                }
+            };
+            timer.start();
         });
         options.setOnMouseClicked(mouseEvent -> menuBox.setSubMenu(optionsMenu));
         optionsBack.setOnMouseClicked(mouseEvent -> menuBox.setSubMenu(mainMenu));
@@ -110,6 +129,38 @@ public class GameEngine extends Application {
         stage.show();
     }
 
+    /*---------------------------------------------------Нажатие кнопки-----------------------------------------*/
+
+    public boolean isPressed(KeyCode key)   {
+        return keysMap.getOrDefault(key, false);
+    }
+
+    /*---------------------------------------------------Обновление анимации-----------------------------------------*/
+
+    public void update()    {
+        if (isPressed(KeyCode.W))  {
+            character.animation.play();
+            character.animation.setOffsetY(96);
+            character.moveY(-2);
+        } else if (isPressed(KeyCode.S))    {
+            character.animation.play();
+            character.animation.setOffsetY(0);
+            character.moveY(2);
+        } else if (isPressed(KeyCode.D))    {
+            character.animation.play();
+            character.animation.setOffsetY(64);
+            character.moveX(2);
+        } else if (isPressed(KeyCode.A))    {
+            character.animation.play();
+            character.animation.setOffsetY(32);
+            character.moveX(-2);
+        } else {
+            character.animation.stop();
+        }
+    }
+
+    /*---------------------------------------------------Класс ячейки меню-----------------------------------------*/
+
     private static class MenuItem extends StackPane {
         public MenuItem(String name) {
             Rectangle bg = new Rectangle(200, 20, Color.WHITE);
@@ -136,6 +187,8 @@ public class GameEngine extends Application {
         }
     }
 
+    /*---------------------------------------------------Класс меню-----------------------------------------*/
+
     private static class MenuBox extends Pane   {
         static SubMenu subMenu;
 
@@ -159,6 +212,8 @@ public class GameEngine extends Application {
         }
     }
 
+    /*---------------------------------------------------Класс подменю-----------------------------------------*/
+
     private static class SubMenu extends VBox {
         public SubMenu(MenuItem...items) {
             this.setSpacing(15);
@@ -170,33 +225,98 @@ public class GameEngine extends Application {
         }
     }
 
-    private static class SpriteAnimation extends Transition {
+    /*---------------------------------------------------Класс анимации-----------------------------------------*/
+
+    private static class SpriteAnimation  extends Transition    {
         private final ImageView imageView;
         private final int count;
-        private final int offsetX;
-        private final int offsetY;
+        private final int columns;
+        private int offsetX;
+        private int offsetY;
         private final int width;
         private final int height;
 
-        public SpriteAnimation(ImageView imageView, Duration duration,
-                               int count, int offsetX, int offsetY,
-                               int width, int height) {
+        public SpriteAnimation(
+                ImageView imageView,
+                Duration duration,
+                int count, int columns,
+                int offsetX, int offsetY,
+                int width, int height
+        )   {
             this.imageView = imageView;
             this.count = count;
+            this.columns = columns;
             this.offsetX = offsetX;
             this.offsetY = offsetY;
             this.width = width;
             this.height = height;
             setCycleDuration(duration);
+            setCycleCount(Animation.INDEFINITE);
+            setInterpolator(Interpolator.LINEAR);
+            this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
         }
 
-        @Override
-        protected void interpolate(double v) {
-            final int index = Math.min((int)Math.floor(v*count), count-1);
-            final int x = width + offsetX;
-            final int y = index * height + offsetY;
+        public void setOffsetX(int x)   {
+            this.offsetX = x;
+        }
+
+        public void setOffsetY(int y)   {
+            this.offsetY = y;
+        }
+
+        protected void interpolate(double frac) {
+            final int index = Math.min((int)Math.floor(count*frac), count-1);
+            final int x = (index%columns)*width+offsetX;
+            final int y = (index/columns)*height+offsetY;
             imageView.setViewport(new Rectangle2D(x, y, width, height));
         }
     }
+
+    /*---------------------------------------------------Класс игрока-----------------------------------------*/
+
+    private static class Character extends FlowPane    {
+        ImageView imageView;
+        int count = 3;
+        int columns = 3;
+        int offsetX = 0;
+        int offsetY = 0;
+        int width = 32;
+        int height = 32;
+        int score = 0;
+        int level = 1;
+
+        SpriteAnimation animation;
+
+        public Character(ImageView imageView) {
+            this.imageView = imageView;
+            this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
+            animation = new SpriteAnimation(imageView, Duration.millis(200.0), count, columns, offsetX, offsetY, width, height);
+            getChildren().add(imageView);
+        }
+
+        public void moveX(int x)    {
+            boolean right = x > 0;
+            for (int i = 0; i < Math.abs(x); i++) {
+                if (right)  {
+                    this.setTranslateX(this.getTranslateX() + 1);
+                } else  {
+                    this.setTranslateX(this.getTranslateX() - 1);
+                }
+            }
+        }
+
+        public void moveY(int y)    {
+            boolean right = y > 0;
+            for (int i = 0; i < Math.abs(y); i++) {
+                if (right)  {
+                    this.setTranslateY(this.getTranslateY() + 1);
+                } else  {
+                    this.setTranslateY(this.getTranslateY() - 1);
+                }
+            }
+        }
+    }
+
+    /*---------------------------------------------------Конец-----------------------------------------*/
 }
 
