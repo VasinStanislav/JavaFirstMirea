@@ -8,10 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -29,8 +27,6 @@ public class GameEngine extends Application {
     private final Image IMAGE = new Image("file:src/ru/mirea/mygamepkg/game/src/main/resources/game/sprites/Semen.png");
     private Character character;
     private final Map<KeyCode, Boolean> keysMap = new HashMap<>();
-    private static final int COUNT = 3;
-    private static final int COLUMNS = 3;
     private static final int OFFSET_X = 0;
     private static final int OFFSET_Y = 32;
     private static final int WIDTH = 32;
@@ -45,7 +41,7 @@ public class GameEngine extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Pane root = new Pane();
-        Scene scene = new Scene(root, 1350.0, 645.30115335325);
+        Scene scene = new Scene(root, 1350.0, 645.30115335325, Color.BLACK);
 
         String menuImgPath = "file:src/ru/mirea/mygamepkg/game/src/main/resources/game/sprites/KOUD_menu_pic.jpg";
         Image menuImage = new Image(menuImgPath);
@@ -58,10 +54,19 @@ public class GameEngine extends Application {
         imageView.setFitHeight(128);
         imageView.setFitWidth(128);
         imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
-        final Animation animation = new SpriteAnimation(imageView, Duration.millis(500.0),
-                COUNT, COLUMNS, OFFSET_X, OFFSET_Y, WIDTH, HEIGHT);
 
-        root.getChildren().add(menuImgView);
+        Rectangle rectangle = new Rectangle();
+        rectangle.setX(scene.getWidth()/2.0 - 200.0);
+        rectangle.setY(0.75*scene.getHeight() - 40.0);
+        rectangle.setWidth(400.0);
+        rectangle.setHeight(80.0);
+        Text text = new Text("НАЖМИТЕ SPACE");
+        text.setFill(Color.AQUA);
+        text.setX(scene.getWidth()/2.0 - 125.0);
+        text.setY(0.75*scene.getHeight() + 10.0);
+        text.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+
+        root.getChildren().addAll(menuImgView, rectangle, text);
 
         MenuItem newGame = new MenuItem("НОВАЯ ИГРА");
         MenuItem options = new MenuItem("НАСТРОЙКИ");
@@ -86,10 +91,14 @@ public class GameEngine extends Application {
                 menuBox.setVisible(false);
             }
             root.getChildren().remove(0);
-            scene.setFill(Color.BLACK);
             stage.setFullScreen(true);
+            stage.setFullScreenExitHint(" ");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            scene.setFill(Color.BLACK);
 
             root.getChildren().add(character);
+            character.setTranslateX(100.0);
+            character.setTranslateY(scene.getHeight()/2.0 - 128.0);
 
             scene.setOnKeyPressed(keyEvent->keysMap.put(keyEvent.getCode(), true));
             scene.setOnKeyReleased(keyEvent -> keysMap.put(keyEvent.getCode(), false));
@@ -108,6 +117,8 @@ public class GameEngine extends Application {
         AtomicBoolean showed = new AtomicBoolean(false);
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.SPACE)   {
+                root.getChildren().remove(2);
+                root.getChildren().remove(1);
                 FadeTransition ft = new FadeTransition(Duration.seconds(1), menuBox);
                 if (!menuBox.isVisible() && !showed.get())   {
                     ft.setFromValue(0);
@@ -141,19 +152,35 @@ public class GameEngine extends Application {
         if (isPressed(KeyCode.W))  {
             character.animation.play();
             character.animation.setOffsetY(96);
-            character.moveY(-4);
+            if (isPressed(KeyCode.SHIFT))   {
+                character.moveY(-9);
+            } else {
+                character.moveY(-5);
+            }
         } else if (isPressed(KeyCode.S))    {
             character.animation.play();
             character.animation.setOffsetY(0);
-            character.moveY(4);
+            if (isPressed(KeyCode.SHIFT))   {
+                character.moveY(9);
+            } else {
+                character.moveY(5);
+            }
         } else if (isPressed(KeyCode.D))    {
             character.animation.play();
             character.animation.setOffsetY(64);
-            character.moveX(4);
+            if (isPressed(KeyCode.SHIFT))   {
+                character.moveX(9);
+            } else {
+                character.moveX(5);
+            }
         } else if (isPressed(KeyCode.A))    {
             character.animation.play();
             character.animation.setOffsetY(32);
-            character.moveX(-4);
+            if (isPressed(KeyCode.SHIFT))   {
+                character.moveX(-9);
+            } else {
+                character.moveX(-5);
+            }
         } else {
             character.animation.stop();
         }
@@ -282,8 +309,6 @@ public class GameEngine extends Application {
         int offsetY = 0;
         int width = 32;
         int height = 32;
-        int score = 0;
-        int level = 1;
 
         SpriteAnimation animation;
 
