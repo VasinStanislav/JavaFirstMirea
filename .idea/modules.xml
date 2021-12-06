@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JavaFirstMirea.iml" filepath="$PROJECT_DIR$/JavaFirstMirea.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/mygamepkg/game/game.iml" filepath="$PROJECT_DIR$/src/ru/mirea/mygamepkg/game/game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task16/project/game/game.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task16/project/game/game.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task18/myexcepionpkgfirst/game_exception/game_exception.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task18/myexcepionpkgfirst/game_exception/game_exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/opt1.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt1/opt1/opt1.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/opt2.iml" filepath="$PROJECT_DIR$/src/ru/mirea/task8/opt2/opt2/opt2.iml" />

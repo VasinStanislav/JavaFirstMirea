@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameEngine extends Application {
-    private final Image IMAGE = new Image("file:src/ru/mirea/mygamepkg/game/src/main/resources/game/sprites/Semen.png");
+    private final Image IMAGE = new Image("file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/Semen.png");
     private Character character;
     private final Map<KeyCode, Boolean> keysMap = new HashMap<>();
     private static final int OFFSET_X = 0;
@@ -43,7 +43,7 @@ public class GameEngine extends Application {
         Pane root = new Pane();
         Scene scene = new Scene(root, 1350.0, 645.30115335325, Color.BLACK);
 
-        String menuImgPath = "file:src/ru/mirea/mygamepkg/game/src/main/resources/game/sprites/KOUD_menu_pic.jpg";
+        String menuImgPath = "file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/KOUD_menu_pic.jpg";
         Image menuImage = new Image(menuImgPath);
         ImageView menuImgView = new ImageView(menuImage);
         menuImgView.setFitHeight(645.30115335325);

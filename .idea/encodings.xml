@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/ru/mirea/mygamepkg/game/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/ru/mirea/mygamepkg/game/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task11/opt1/t11_1/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task11/opt2/t11_2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task11/opt3/t11_3/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task11/opt3/t11_3/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task14/opt5/t14_5/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task14/opt5/t14_5/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ru/mirea/task16/project/game/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ru/mirea/task16/project/game/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task18/myexcepionpkgfirst/game_exception/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task18/myexcepionpkgfirst/game_exception/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/mirea/task21/t21/src/main/java" charset="UTF-8" />

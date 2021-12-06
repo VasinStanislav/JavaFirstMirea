@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="t11_3" />
-        <module name="game" />
         <module name="game_exception" />
         <module name="t21" />
+        <module name="game" />
         <module name="opt3" />
         <module name="t14_5" />
         <module name="t9" />
