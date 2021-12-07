@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -20,6 +19,7 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +36,11 @@ public class GameEngine extends Application {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
 
+    private final Pane root = new Pane();
+    public static Pane locationRoot = new Pane();
+
+    public static ArrayList<Block> blocks = new ArrayList<>();
+
     public static void main(String[] args) {
         launch();
     }
@@ -49,7 +54,6 @@ public class GameEngine extends Application {
         File file2 = new File("launch_time.txt");
         FileWriter writer = new FileWriter(file1.getName(), false);
 
-        Pane root = new Pane();
         Scene scene = new Scene(root, 1350.0, 645.30115335325, Color.BLACK);
 
         String menuImgPath = "file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/KOUD_menu_pic.jpg";
@@ -90,6 +94,8 @@ public class GameEngine extends Application {
 
         MenuBox menuBox = new MenuBox(mainMenu);
 
+        /*----------------------Запуск новой игры--------------------------*/
+
         newGame.setOnMouseClicked(mouseEvent -> {
             start.set(new Date());
             try(FileWriter wr = new FileWriter("launch_time.txt"))
@@ -102,7 +108,7 @@ public class GameEngine extends Application {
                 System.out.println(ex.getMessage());
             }
 
-            menuBox.removeSubMenu();
+            //menuBox.removeSubMenu();
             FadeTransition ft = new FadeTransition(Duration.seconds(1), menuBox);
             if (menuBox.isVisible())    {
                 ft.setFromValue(1);
@@ -111,12 +117,13 @@ public class GameEngine extends Application {
                 menuBox.setVisible(false);
             }
             root.getChildren().remove(0);
-            stage.setFullScreen(true);
-            stage.setFullScreenExitHint(" ");
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.setWidth(1280.0);
+            stage.setHeight(640.0);
             scene.setFill(Color.BLACK);
 
             root.getChildren().add(character);
+            initContent();
+
             character.setTranslateX(100.0);
             character.setTranslateY(scene.getHeight()/2.0 - 128.0);
 
@@ -145,6 +152,9 @@ public class GameEngine extends Application {
             };
             timer.start();
         });
+
+        /*---------------------------------------------------------------------*/
+
         options.setOnMouseClicked(mouseEvent -> menuBox.setSubMenu(optionsMenu));
         optionsBack.setOnMouseClicked(mouseEvent -> menuBox.setSubMenu(mainMenu));
         exitGame.setOnMouseClicked(mouseEvent -> System.exit(0));
@@ -169,7 +179,7 @@ public class GameEngine extends Application {
         stage.setWidth(1350.0);
         stage.setHeight(645.30115335325);
         stage.setResizable(false);
-        stage.setTitle("KNOTUD: menu");
+        stage.setTitle("KNOTUD");
         stage.setScene(scene);
         stage.show();
     }
@@ -207,10 +217,10 @@ public class GameEngine extends Application {
             } else {
                 character.moveX(5);
             }
-        } else if (isPressed(KeyCode.A))    {
+        } else if (isPressed(KeyCode.A)) {
             character.animation.play();
             character.animation.setOffsetY(32);
-            if (isPressed(KeyCode.SHIFT))   {
+            if (isPressed(KeyCode.SHIFT)) {
                 character.moveX(-9);
             } else {
                 character.moveX(-5);
@@ -218,6 +228,25 @@ public class GameEngine extends Application {
         } else {
             character.animation.stop();
         }
+    }
+
+    private void initContent() {
+        for (int i = 0; i < 10; i++)    {
+            String line = LocationData.Location[i];
+            for (int j = 0; j < line.length(); j++) {
+                switch (line.charAt(j)) {
+                    case 0:
+                        break;
+                    case 1:
+                        Block floor = new Block(Block.FloorCovering.BRICK, j*64, i*64);
+                        break;
+                }
+
+            }
+
+        }
+        root.getChildren().add(locationRoot);
+
     }
 
     /*---------------------------------------------------Класс ячейки меню-----------------------------------------*/
@@ -374,6 +403,83 @@ public class GameEngine extends Application {
                 }
             }
         }
+    }
+
+    private static class Block  extends FlowPane    {
+        private Image blockImg;
+        private ImageView blockImgView;
+
+        public enum FloorCovering  {
+            LINOLEUM, CARPET, WOOD, BRICK, MARBLE, VOID, PAVEMENT, SOIL, CLAY, GLASS, SHATTERED_GLASS, SPIKES, RUBBISH
+        }
+
+        public enum Wall   {
+            WOODEN_WALL, BRICK_WALL, STONE_WALL, RUSTY_METAL_WALL, MUD_WALL, GLASS_WALL, TRASH_HEAP
+        }
+
+        public Block(FloorCovering floorCovering, int x, int y)  {
+            setTranslateX(x);
+            setTranslateY(y);
+
+             switch (floorCovering) {
+                 case LINOLEUM:
+                     break;
+                 case CARPET:
+                     break;
+                 case WOOD:
+                     break;
+                 case BRICK:
+                     blockImg = new Image("file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/BrickFloor.png");
+                     blockImgView = new ImageView(blockImg);
+                     this.blockImgView.setViewport(new Rectangle2D(0, 0, 32, 32));
+                     break;
+                 case MARBLE:
+                     break;
+                 case VOID:
+                     break;
+                 case PAVEMENT:
+                     break;
+                 case SOIL:
+                     break;
+                 case CLAY:
+                     break;
+                 case GLASS:
+                     break;
+                 case SHATTERED_GLASS:
+                     break;
+                 case SPIKES:
+                     break;
+                 case RUBBISH:
+                     break;
+             }
+
+             blockImgView.setFitWidth(64);
+             blockImgView.setFitHeight(64);
+             getChildren().add(blockImgView);
+             GameEngine.blocks.add(this);
+             GameEngine.locationRoot.getChildren().add(this);
+        }
+
+        public Block(Wall wall, int x, int y)  {
+
+        }
+    }
+
+    /*---------------------------------------------------Класс структуры локации (ROM)-----------------------------------------*/
+
+    private static class LocationData {
+        public static String[] Location = new String[]{
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000011111111000000000000000000000000000000000000000000000000000000000000000000",
+                "00000010100101000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        };
     }
 
     /*---------------------------------------------------Конец-----------------------------------------*/
