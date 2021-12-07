@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +45,9 @@ public class GameEngine extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         AtomicReference<Date> start = new AtomicReference<>();
-        File file = new File("duration.txt");
-        FileWriter writer = new FileWriter(file.getName(), false);
+        File file1 = new File("duration.txt");
+        File file2 = new File("launch_time.txt");
+        FileWriter writer = new FileWriter(file1.getName(), false);
 
         Pane root = new Pane();
         Scene scene = new Scene(root, 1350.0, 645.30115335325, Color.BLACK);
@@ -90,6 +92,15 @@ public class GameEngine extends Application {
 
         newGame.setOnMouseClicked(mouseEvent -> {
             start.set(new Date());
+            try(FileWriter wr = new FileWriter("launch_time.txt"))
+            {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy HH:mm:ss");
+                wr.write(dateFormat.format(start.get()));
+                wr.flush();
+            }
+            catch(IOException ex){
+                System.out.println(ex.getMessage());
+            }
 
             menuBox.removeSubMenu();
             FadeTransition ft = new FadeTransition(Duration.seconds(1), menuBox);
