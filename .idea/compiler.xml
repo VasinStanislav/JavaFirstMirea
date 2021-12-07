@@ -7,15 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="date" />
-        <module name="t11_3" />
-        <module name="game_exception" />
-        <module name="t21" />
         <module name="game" />
-        <module name="opt3" />
-        <module name="t14_5" />
         <module name="t9" />
         <module name="opt1" />
         <module name="opt2" />
+        <module name="t11_3" />
+        <module name="game_exception" />
+        <module name="t21" />
+        <module name="opt3" />
+        <module name="t14_5" />
+        <module name="t25" />
+        <module name="t27" />
         <module name="t11_2" />
         <module name="t11_1" />
       </profile>
@@ -34,6 +36,8 @@
       <module name="t11_3" target="17" />
       <module name="t14_5" target="17" />
       <module name="t21" target="17" />
+      <module name="t25" target="17" />
+      <module name="t27" target="17" />
       <module name="t9" target="16" />
     </bytecodeTargetLevel>
   </component>
