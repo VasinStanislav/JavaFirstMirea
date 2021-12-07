@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="date" />
         <module name="t11_3" />
         <module name="game_exception" />
         <module name="t21" />
@@ -20,6 +21,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="date" target="17" />
       <module name="demo" target="17" />
       <module name="game" target="17" />
       <module name="game.exception" target="17" />
