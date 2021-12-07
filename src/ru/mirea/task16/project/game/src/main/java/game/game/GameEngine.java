@@ -19,9 +19,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class GameEngine extends Application {
     private final Image IMAGE = new Image("file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/Semen.png");
@@ -40,6 +43,10 @@ public class GameEngine extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        AtomicReference<Date> start = new AtomicReference<>();
+        File file = new File("duration.txt");
+        FileWriter writer = new FileWriter(file.getName(), false);
+
         Pane root = new Pane();
         Scene scene = new Scene(root, 1350.0, 645.30115335325, Color.BLACK);
 
@@ -82,6 +89,8 @@ public class GameEngine extends Application {
         MenuBox menuBox = new MenuBox(mainMenu);
 
         newGame.setOnMouseClicked(mouseEvent -> {
+            start.set(new Date());
+
             menuBox.removeSubMenu();
             FadeTransition ft = new FadeTransition(Duration.seconds(1), menuBox);
             if (menuBox.isVisible())    {
@@ -106,6 +115,20 @@ public class GameEngine extends Application {
             AnimationTimer timer = new AnimationTimer() {
                 @Override
                 public void handle(long l) {
+                    try(FileWriter wr = new FileWriter("duration.txt"))
+                    {
+                        long time = System.currentTimeMillis() - start.get().getTime();
+                        long seconds = TimeUnit.SECONDS.convert(time, TimeUnit.MILLISECONDS);
+                        long minutes = seconds/60;
+                        seconds = seconds%60;
+
+                        wr.write(minutes + "m " + seconds + "s");
+                        wr.flush();
+                    }
+                    catch(IOException ex){
+                        System.out.println(ex.getMessage());
+                    }
+
                     update();
                 }
             };
