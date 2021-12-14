@@ -12,8 +12,8 @@
         <module name="opt1" />
         <module name="opt2" />
         <module name="t11_3" />
-        <module name="game_exception" />
         <module name="t21" />
+        <module name="game_exception" />
         <module name="opt3" />
         <module name="t14_5" />
         <module name="t25" />
@@ -24,17 +24,16 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="date" target="17" />
-      <module name="demo" target="17" />
+      <module name="demo" target="16" />
       <module name="game" target="17" />
-      <module name="game.exception" target="17" />
       <module name="game_exception" target="17" />
       <module name="opt1" target="16" />
       <module name="opt2" target="16" />
       <module name="opt3" target="16" />
       <module name="t11_1" target="16" />
       <module name="t11_2" target="16" />
-      <module name="t11_3" target="17" />
-      <module name="t14_5" target="17" />
+      <module name="t11_3" target="16" />
+      <module name="t14_5" target="16" />
       <module name="t21" target="17" />
       <module name="t25" target="17" />
       <module name="t27" target="17" />
