@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PayByDigitalWallet implements PayStrategy{
-    private static final Map<String, String> DATA_BASE = new HashMap<>();
     private final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
     private String email;
     private String password;
@@ -19,7 +18,7 @@ public class PayByDigitalWallet implements PayStrategy{
     }
 
     public void setSignedIn(boolean signedIn)   {
-
+        this.signedIn = signedIn;
     }
 
     private boolean verify()    {
@@ -29,16 +28,21 @@ public class PayByDigitalWallet implements PayStrategy{
 
     @Override
     public boolean pay(int paymentAmount) {
-        return false;
+        if (signedIn) {
+            System.out.println("Списывается " + paymentAmount + " с электронного кошелька.");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void collectPaymentDetails() throws IOException {
         try {
             while (!signedIn) {
-                System.out.print("Введите логин почты: ");
+                System.out.print("Введите логин почты:\n");
                 email = READER.readLine();
-                System.out.print("Введите пароль: ");
+                System.out.print("Введите пароль:\n");
                 password = READER.readLine();
                 if (verify()) {
                     System.out.println("Проверка прошла успешно.");

@@ -41,9 +41,25 @@ class CreditCard    {
 public class PayByCreditCard implements PayStrategy {
     private final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
     private CreditCard card;
+    private String cardNumber;
+    private String cvvYear;
+    private boolean signedIn;
+
+    static {
+        DATA_BASE.put("1221 132", "4222");
+    }
 
     private boolean cardIsPresent() {
         return card != null;
+    }
+
+    public void setSignedIn(boolean signedIn)   {
+        this.signedIn = signedIn;
+    }
+
+    private boolean verify()    {
+        setSignedIn(cardNumber.equals(DATA_BASE.get(cvvYear)));
+        return  signedIn;
     }
 
     @Override
@@ -60,13 +76,24 @@ public class PayByCreditCard implements PayStrategy {
     @Override
     public void collectPaymentDetails() throws IOException {
         try {
-            System.out.print("Введите номер карты: ");
-            String number = READER.readLine();
-            System.out.print("Введите дату окончания срока карты 'mm/yy': ");
-            String date = READER.readLine();
-            System.out.print("Enter the CVV code: ");
-            String cvv = READER.readLine();
-            card = new CreditCard(number, date, cvv);
+            while (card == null) {
+                System.out.print("Введите номер карты: ");
+                String number = READER.readLine();
+                System.out.print("Введите дату окончания срока карты 'mm/yy': ");
+                String date = READER.readLine();
+                System.out.print("Введите CVV код: ");
+                String cvv = READER.readLine();
+
+                cardNumber = number;
+                cvvYear = date + " " + cvv;
+
+                if (verify())   {
+                    card = new CreditCard(number, date, cvv);
+                    System.out.println("Проверка прошла успешно.");
+                } else {
+                    System.out.println("Неверно введены данные карты!");
+                }
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
