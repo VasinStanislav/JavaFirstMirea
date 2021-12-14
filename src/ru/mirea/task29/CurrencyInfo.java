@@ -22,6 +22,10 @@ public class CurrencyInfo implements Serializable {
         }
     }
 
+    public Map<String, Double> getCurrencies() {
+        return currencies;
+    }
+
     public Double getExchangeRate(String currency)  {
         return currencies.getOrDefault(currency, 0.0);
     }

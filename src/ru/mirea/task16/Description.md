@@ -5,4 +5,4 @@
 
 **UML-диаграмма** приложения: 
 
-![img.png](UML.png)ф
+![img.png](UML.png)
