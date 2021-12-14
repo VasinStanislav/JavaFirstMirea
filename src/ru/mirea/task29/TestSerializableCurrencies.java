@@ -33,6 +33,7 @@ public class TestSerializableCurrencies {
         Double value = curInfo2.convertTo("Доллар США", "Евро");
         System.out.println("Метод convertTo второго объекта. Результат:\n" +
                 "Доллар США к Евро: " + value);
+        System.out.println("Курс доллара США: " + curInfo2.getExchangeRate("Доллар США"));
 
         FileInputStream fileInputStream = new FileInputStream("src/ru/mirea/task29/CurrencyInfo");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -43,6 +44,7 @@ public class TestSerializableCurrencies {
         System.out.println("Метод convertTo второго объекта после переопределения " +
                 "с помощью сериализации. Результат:\n" +
                 "Доллар США к Евро: " + value);
+        System.out.println("Курс доллара США: " + curInfo2.getExchangeRate("Доллар США"));
 
         System.out.print("Сравниваем объекты: " + curInfo1.equals(curInfo2));
     }
