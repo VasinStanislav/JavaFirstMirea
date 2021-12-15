@@ -121,8 +121,8 @@ public class GameEngine extends Application {
             stage.setHeight(640.0);
             scene.setFill(Color.BLACK);
 
-            root.getChildren().add(character);
             initContent();
+            root.getChildren().add(character);
 
             character.setTranslateX(100.0);
             character.setTranslateY(scene.getHeight()/2.0 - 128.0);
@@ -175,6 +175,9 @@ public class GameEngine extends Application {
         });
 
         root.getChildren().add(menuBox);
+
+        Image image = new Image("file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/Gang.png");
+        stage.getIcons().add(image);
 
         stage.setWidth(1350.0);
         stage.setHeight(645.30115335325);
@@ -230,15 +233,23 @@ public class GameEngine extends Application {
         }
     }
 
+    /*---------------------------------------------------Отрисовывание локации-----------------------------------------*/
+
     private void initContent() {
         for (int i = 0; i < 10; i++)    {
             String line = LocationData.Location[i];
             for (int j = 0; j < line.length(); j++) {
                 switch (line.charAt(j)) {
-                    case 0:
+                    case '0':
                         break;
-                    case 1:
+                    case '1':
                         Block floor = new Block(Block.FloorCovering.BRICK, j*64, i*64);
+                        break;
+                    case '2':
+                        Block wall = new Block(Block.Wall.BRICK_WALL, j*64, i*64);
+                        break;
+                    case '3':
+                        Block column = new Block(Block.Wall.BRICK_COLUMNS, j*64, i*64);
                         break;
                 }
 
@@ -405,6 +416,8 @@ public class GameEngine extends Application {
         }
     }
 
+    /*---------------------------------------------------Класс блока-----------------------------------------*/
+
     private static class Block  extends FlowPane    {
         private Image blockImg;
         private ImageView blockImgView;
@@ -414,7 +427,7 @@ public class GameEngine extends Application {
         }
 
         public enum Wall   {
-            WOODEN_WALL, BRICK_WALL, STONE_WALL, RUSTY_METAL_WALL, MUD_WALL, GLASS_WALL, TRASH_HEAP
+            WOODEN_WALL, BRICK_WALL, BRICK_COLUMNS, STONE_WALL, RUSTY_METAL_WALL, MUD_WALL, GLASS_WALL, TRASH_HEAP
         }
 
         public Block(FloorCovering floorCovering, int x, int y)  {
@@ -461,7 +474,39 @@ public class GameEngine extends Application {
         }
 
         public Block(Wall wall, int x, int y)  {
+            setTranslateX(x);
+            setTranslateY(y);
 
+            switch (wall) {
+                case WOODEN_WALL:
+                    break;
+                case BRICK_WALL:
+                    blockImg = new Image("file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/BrickWall.png");
+                    blockImgView = new ImageView(blockImg);
+                    this.blockImgView.setViewport(new Rectangle2D(0, 10, 32, 32));
+                    break;
+                case BRICK_COLUMNS:
+                    blockImg = new Image("file:src/ru/mirea/task16/project/game/src/main/resources/game/sprites/BrickColumns.png");
+                    blockImgView = new ImageView(blockImg);
+                    this.blockImgView.setViewport(new Rectangle2D(0, 43, 32, 32));
+                    break;
+                case STONE_WALL:
+                    break;
+                case RUSTY_METAL_WALL:
+                    break;
+                case MUD_WALL:
+                    break;
+                case GLASS_WALL:
+                    break;
+                case TRASH_HEAP:
+                    break;
+            }
+
+            blockImgView.setFitWidth(64);
+            blockImgView.setFitHeight(64);
+            getChildren().add(blockImgView);
+            GameEngine.blocks.add(this);
+            GameEngine.locationRoot.getChildren().add(this);
         }
     }
 
@@ -469,13 +514,13 @@ public class GameEngine extends Application {
 
     private static class LocationData {
         public static String[] Location = new String[]{
-                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-                "00000011111111000000000000000000000000000000000000000000000000000000000000000000",
-                "00000010100101000000000000000000000000000000000000000000000000000000000000000000",
-                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-                "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "11111111111111111111111100000000000000000000000000000000000000000000000000000000",
+                "11111111111111111111111100000000000000000000000000000000000000000000000000000000",
+                "11111111111111111111111100000000000000000000000000000000000000000000000000000000",
+                "11111111111111111111111100000000000000000000000000000000000000000000000000000000",
+                "11111111111111111111111100000000000000000000000000000000000000000000000000000000",
+                "11111111111111111111111100000000000000000000000000000000000000000000000000000000",
+                "22222222222222222223000000000000000000000000000000000000000000000000000000000000",
                 "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
                 "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
                 "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
